@@ -7,9 +7,7 @@ router.get('/', function(req, res) {
   
   
   res.render('dashboard', {
-      openIssuesCount,
-      title: ''
-
+      openIssuesCount
   });
 });
 
