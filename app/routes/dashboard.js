@@ -1,8 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const {issueStore} = require('../models');
 
 router.get('/', function(req, res) {
-  res.render('dashboard', {});
+  const openIssuesCount = issueStore.getAllOpen().length;
+  
+  
+  res.render('dashboard', {
+      openIssuesCount,
+      title: ''
+
+  });
 });
 
 module.exports = router;
