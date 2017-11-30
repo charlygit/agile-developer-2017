@@ -3,11 +3,14 @@ const router = express.Router();
 const {issueStore} = require('../models');
 
 router.get('/', function(req, res) {
+  const openIssues = issueStore.getAllOpen();
   const openIssuesCount = issueStore.getAllOpen().length;
-  
+  const highSeverityCount =
+    openIssues.filter(issue => issue.severity === 'High').length;
   
   res.render('dashboard', {
-      openIssuesCount
+      openIssuesCount, 
+      highSeverityPercentage: highSeverityCount / openIssuesCount
   });
 });
 
