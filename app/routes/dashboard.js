@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const {issueStore} = require('../models');
 
+function percentage(count, total) {
+  if (total > 0) {
+    return count / total;
+  }
+  return 0;
+}
+
 router.get('/', function(req, res) {
   const openIssues = issueStore.getAllOpen();
   const openIssuesCount = issueStore.getAllOpen().length;
@@ -10,7 +17,7 @@ router.get('/', function(req, res) {
   
   res.render('dashboard', {
       openIssuesCount, 
-      highSeverityPercentage: highSeverityCount / openIssuesCount
+      highSeverityPercentage: percentage(highSeverityCount, openIssuesCount)
   });
 });
 
